@@ -18,8 +18,9 @@ where y is the dependent variable, k is the diffusion coefficient, x is the spat
 
 For the present study:
 
-* Diffusion coefficient, k = 1
-* Domain length, L = 1
+• Diffusion coefficient, k = 1
+
+• Domain length, L = 1
 
 The boundary conditions are:
 
@@ -27,7 +28,7 @@ y(0,t) = 0
 
 y(1,t) = 1
 
-At steady state, the time derivative becomes zero, giving
+At steady state:
 
 d²y/dx² = 0
 
@@ -39,15 +40,15 @@ Integrating again:
 
 y = C₁x + C₂
 
-Applying the boundary condition y(0) = 0 gives
+Applying y(0)=0:
 
 C₂ = 0
 
-Applying the boundary condition y(1) = 1 gives
+Applying y(1)=1:
 
 C₁ = 1
 
-Therefore, the analytical steady-state solution is
+Therefore,
 
 y(x) = x
 
@@ -55,105 +56,42 @@ This analytical solution is used as the reference solution for validating the nu
 
 ## 3. Numerical Implementation
 
-## 3. Numerical Implementation
+The governing diffusion equation was solved numerically using the FiPy finite volume package in Python. A one-dimensional uniform mesh was generated over the domain 0 ≤ x ≤ 1.
 
-The governing diffusion equation was solved numerically using the FiPy finite volume package in Python. A one-dimensional uniform mesh was generated over the domain (0 \leq x \leq 1).
+Simulation parameters:
 
-The following simulation parameters were used:
+| Parameter                 | Value    |
+| ------------------------- | -------- |
+| Domain Length (L)         | 1.0      |
+| Number of Cells (nx)      | 50       |
+| Cell Size (Δx)            | 0.02     |
+| Diffusion Coefficient (k) | 1.0      |
+| Time Step (Δt)            | 1 × 10⁻³ |
+| Number of Time Steps      | 5000     |
 
-| Parameter                 | Value              |
-| ------------------------- | ------------------ |
-| Domain Length (L)         | 1.0                |
-| Number of Cells ((n_x))   | 50                 |
-| Cell Size ((\Delta x))    | 0.02               |
-| Diffusion Coefficient (k) | 1.0                |
-| Time Step ((\Delta t))    | (1 \times 10^{-3}) |
-| Number of Time Steps      | 5000               |
+The initial condition was
 
-The dependent variable was initialized using:
+y(x,0) = sin(πx)
 
-[
-y(x,0)=\sin(\pi x)
-]
+Dirichlet boundary conditions were imposed at both ends:
 
-Dirichlet boundary conditions were imposed at both ends of the domain:
-
-[
 y(0,t)=0
-]
 
-[
 y(1,t)=1
-]
 
-The transient diffusion equation was solved iteratively until the numerical solution converged to the steady-state profile. The finite volume method discretizes the governing equation over each control volume and ensures conservation of the transported quantity throughout the computational domain.
-
+The transient diffusion equation was solved iteratively until convergence to steady state was achieved.
 
 ## 4. Results and Discussion
 
 ### 4.1 Transient Evolution of the Solution
 
-The transient diffusion equation was solved using FiPy starting from the initial condition (y(x,0)=\sin(\pi x)). As the simulation progressed, the solution evolved under the influence of diffusion and gradually approached the steady-state profile imposed by the Dirichlet boundary conditions.
+The transient diffusion equation was solved using FiPy starting from the initial condition y(x,0)=sin(πx). As the simulation progressed, the solution evolved under the influence of diffusion and gradually approached the steady-state profile imposed by the Dirichlet boundary conditions.
 
 The transient evolution demonstrates the smoothing effect of diffusion, where the initial non-linear profile progressively transforms into the final linear steady-state solution. The solution remains stable throughout the simulation and converges monotonically toward the steady-state configuration.
 
-### 4.2 Steady-State Solution
+[Insert Figure: Transient Evolution]
 
-After a sufficient number of time steps, the transient solution converged to a steady-state profile. Under the prescribed Dirichlet boundary conditions, the analytical steady-state solution is linear and is given by
-
-[
-y(x)=x
-]
-
-The numerical solution obtained using FiPy successfully reproduced the expected linear behavior across the entire computational domain. The resulting profile satisfies both boundary conditions and exhibits the characteristics expected from a diffusion process without internal heat generation.
-
-The steady-state solution confirms that the numerical implementation correctly captures the physical behavior of the governing diffusion equation and converges to the analytical solution as time progresses.
-
-### 4.3 Steady-State Verification
-
-To verify that the solution had reached steady state, the maximum change in the solution between successive time steps was monitored throughout the simulation. As the transient evolution progressed, the magnitude of these changes decreased steadily and eventually approached zero.
-
-This behavior indicates that the numerical solution no longer evolves with time and has reached a stable equilibrium state. The steady-state verification confirms that the selected simulation duration was sufficient to eliminate transient effects and obtain the final converged solution.
-
-
-### 4.4 Numerical vs Analytical Comparison
-
-The steady-state numerical solution obtained using FiPy was compared directly with the analytical solution
-
-[
-y(x)=x
-]
-
-to evaluate the accuracy of the finite volume implementation.
-
-The comparison demonstrates excellent agreement between the numerical and analytical solutions throughout the computational domain. The numerical profile closely overlaps the analytical profile, indicating that the governing equation, boundary conditions, and numerical discretization have been implemented correctly.
-
-The close correspondence between the two solutions confirms the accuracy of the finite volume formulation used in FiPy and validates the numerical approach adopted in this study.
-
-
-## 5. Numerical vs Analytical Validation
-
-Validation of the numerical solution was performed by comparing the FiPy results with the analytical steady-state solution derived from the governing equation.
-
-The analytical solution for the present problem is
-
-[
-y(x)=x
-]
-
-The numerical results exhibit excellent agreement with the analytical profile across the entire domain. The observed differences are negligible and arise primarily from discretization effects associated with the finite volume approximation.
-
-The successful agreement between the numerical and analytical solutions provides strong evidence that the implementation is mathematically correct and that the numerical scheme accurately captures the underlying diffusion physics.
-
-## 6. Mesh Convergence Study
-
-A mesh convergence study was performed to investigate the influence of spatial discretization on the numerical solution. Simulations were conducted using progressively finer meshes while maintaining the same physical parameters and boundary conditions.
-
-As the mesh density increased, the numerical solution approached a limiting profile corresponding to the analytical solution. The differences between successive mesh refinements decreased significantly, indicating convergence of the finite volume discretization.
-
-The results demonstrate that the numerical solution becomes increasingly independent of the mesh size as the spatial resolution is refined. This confirms that the selected mesh is sufficiently fine to accurately represent the underlying diffusion process.
-
-## 7. Time-Step Convergence Study
+### 4.2 Time-Step Convergence Study
 
 A time-step convergence study was performed to evaluate the sensitivity of the transient solution to temporal discretization. Simulations were carried out using different time-step sizes while keeping all other numerical parameters unchanged.
 
@@ -161,22 +99,56 @@ The results indicate that as the time-step size decreases, the numerical solutio
 
 The study confirms that the chosen time-step size provides a stable and accurate representation of the transient diffusion process while maintaining computational efficiency.
 
-## 8. Error Analysis
+[Insert Figure: Time-Step Convergence]
+
+### 4.3 Mesh Convergence Study
+
+A mesh convergence study was performed to investigate the influence of spatial discretization on the numerical solution. Simulations were conducted using progressively finer meshes while maintaining the same physical parameters and boundary conditions.
+
+As the mesh density increased, the numerical solution approached a limiting profile corresponding to the analytical solution. The differences between successive mesh refinements decreased significantly, indicating convergence of the finite volume discretization.
+
+The results demonstrate that the numerical solution becomes increasingly independent of the mesh size as the spatial resolution is refined.
+
+[Insert Figure: Mesh Convergence]
+
+### 4.4 Steady-State Solution
+
+After a sufficient number of time steps, the transient solution converged to a steady-state profile. Under the prescribed Dirichlet boundary conditions, the analytical steady-state solution is
+
+y(x)=x
+
+The numerical solution obtained using FiPy successfully reproduced the expected linear behavior across the entire computational domain.
+
+[Insert Figure: Steady-State Solution]
+
+### 4.5 Steady-State Verification
+
+To verify that the solution had reached steady state, the maximum change in the solution between successive time steps was monitored throughout the simulation.
+
+As the transient evolution progressed, the magnitude of these changes decreased steadily and eventually approached zero, confirming convergence to a stable equilibrium state.
+
+[Insert Figure: Steady-State Verification]
+
+### 4.6 Numerical vs Analytical Comparison
+
+The steady-state numerical solution obtained using FiPy was compared directly with the analytical solution y(x)=x.
+
+The comparison demonstrates excellent agreement between the numerical and analytical solutions throughout the computational domain. The numerical profile closely overlaps the analytical profile, confirming the correctness of the implementation.
+
+[Insert Figure: Numerical vs Analytical Comparison]
+
+### 4.7 Error Analysis
 
 To quantify the accuracy of the numerical solution, the difference between the numerical and analytical solutions was evaluated across the computational domain.
 
-The error distribution remains extremely small throughout the domain, indicating excellent agreement between the numerical and analytical solutions. The observed errors are primarily due to discretization effects associated with the finite volume approximation and floating-point numerical precision.
+The error distribution remains extremely small throughout the domain, indicating excellent agreement between the numerical and analytical solutions. The low error magnitude confirms the correctness of the numerical implementation.
 
-The low error magnitude confirms the correctness of the numerical implementation and demonstrates the capability of FiPy to accurately solve one-dimensional diffusion problems under Dirichlet boundary conditions.
+[Insert Figure: Error Distribution]
 
-## 9. Conclusion
+## 5. Conclusion
 
-In this case study, the one-dimensional transient diffusion equation without a source term was successfully solved using the Finite Volume Method implemented in FiPy. Dirichlet boundary conditions were imposed at both ends of the computational domain, and the transient solution was evolved until steady state was reached.
+In this case study, the one-dimensional transient diffusion equation without a source term was successfully solved using the Finite Volume Method implemented in FiPy.
 
-The numerical results exhibited excellent agreement with the analytical steady-state solution, validating the correctness of the implementation. Mesh convergence and time-step convergence studies confirmed the numerical stability and consistency of the solution. Error analysis demonstrated that the discrepancy between the numerical and analytical solutions is negligible.
+The numerical results exhibited excellent agreement with the analytical steady-state solution. Time-step convergence and mesh convergence studies confirmed the numerical stability and consistency of the solution, while error analysis demonstrated negligible deviation from the analytical result.
 
 Overall, the study verifies the accuracy of the finite volume approach for solving one-dimensional diffusion problems and establishes a foundation for the subsequent investigation of more complex boundary conditions and source terms.
-
-
-
-
