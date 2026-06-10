@@ -1,3 +1,16 @@
+# 1D Heat Diffusion Equation Solver Using FiPy
+
+Finite Volume Method (FVM) implementation of the 1D transient heat diffusion equation using FiPy.
+
+Features:
+- Dirichlet, Neumann and Robin boundary conditions
+- Source and no-source formulations
+- Transient and steady-state analysis
+- Mesh convergence study
+- Time-step convergence study
+- Numerical vs analytical validation
+- Error analysis
+
 # 1D Heat Diffusion Using FiPy
 
 ## Overview
