@@ -11,7 +11,6 @@ Features:
 - Numerical vs analytical validation
 - Error analysis
 
-# 1D Heat Diffusion Using FiPy
 
 ## Overview
 
