@@ -76,12 +76,12 @@ The governing diffusion equation is solved using the Finite Volume Method (FVM) 
 ## Repository Structure
 
 ```text
-Case_1/
-Case_2/
-Case_3/
-Case_4/
-Case_5/
-Case_6/
+Case_1_Dirichlet_NoSource/
+Case_2_Dirichlet_Source/
+Case_3_Modified_Neumann/
+Case_4_Neumann_Source/
+Case_5_Robin_Source/
+Case_6_Robin_NoSource/
 docs/
 README.md
 ```
