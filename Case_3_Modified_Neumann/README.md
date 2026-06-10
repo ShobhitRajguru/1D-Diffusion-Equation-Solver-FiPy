@@ -4,15 +4,14 @@
 
 This case investigates the numerical solution of the one-dimensional transient diffusion equation without a source term using the Finite Volume Method (FVM) implemented in FiPy.
 
-The computational domain extends from (x=0) to (x=1) with mixed boundary conditions:
+The computational domain extends from (x=0) to (x=1) with mixed boundary conditions consisting of a Dirichlet condition at the left boundary and a Neumann condition at the right boundary.
 
-* Dirichlet boundary condition at the left boundary
-* Neumann boundary condition at the right boundary
+### Boundary Conditions
 
-Boundary conditions:
-
-* (y(0,t)=1)
-* (\frac{dy}{dx}(1,t)=0)
+```text
+y(0,t) = 1
+dy/dx (1,t) = 0
+```
 
 The combination of a fixed-value boundary and a zero-flux boundary results in a constant steady-state solution throughout the domain.
 
@@ -28,15 +27,15 @@ k\frac{\partial^2 y}{\partial x^2}
 
 where:
 
-* (y) = dependent variable
-* (k) = diffusion coefficient
-* (x) = spatial coordinate
-* (t) = time
+* y = dependent variable
+* k = diffusion coefficient
+* x = spatial coordinate
+* t = time
 
 For this study:
 
-* Diffusion coefficient (k = 1)
-* Domain length (L = 1)
+* Diffusion coefficient k = 1
+* Domain length L = 1
 
 ---
 
@@ -50,12 +49,9 @@ At steady state:
 
 Applying the boundary conditions:
 
-```math
-y(0)=1
-```
-
-```math
-\frac{dy}{dx}(1)=0
+```text
+y(0) = 1
+dy/dx (1) = 0
 ```
 
 gives:
@@ -80,8 +76,8 @@ This analytical solution is used to validate the numerical results.
 
 Initial Condition:
 
-```math
-y(x,0)=\sin(\pi x)
+```text
+y(x,0) = sin(πx)
 ```
 
 ---
@@ -104,16 +100,12 @@ y(x,0)=\sin(\pi x)
 * Time-step convergence confirms temporal independence of the numerical solution.
 * Mesh convergence confirms spatial independence of the numerical solution.
 * Numerical and analytical solutions show near-perfect agreement.
-* Maximum Error:
+
+### Error Metrics
 
 ```text
-7.99 × 10⁻¹²
-```
-
-* L2 Error:
-
-```text
-5.64 × 10⁻¹²
+Maximum Error = 7.99 × 10⁻¹²
+L2 Error      = 5.64 × 10⁻¹²
 ```
 
 The error is close to machine precision, demonstrating the accuracy of the FiPy implementation.
