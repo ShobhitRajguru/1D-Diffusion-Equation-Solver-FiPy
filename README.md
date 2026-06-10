@@ -36,16 +36,17 @@ The work was carried out as part of an M.Tech study in computational modeling an
 
 * Source-driven diffusion problem.
 * Analytical validation performed.
+  
+### Case 5: Robin Boundary Condition (With Source)
 
-### Case 5: Robin Boundary Condition (No Source)
+* Mixed boundary condition with source term.
+* Analytical and numerical comparison performed.
+  
+### Case 6: Robin Boundary Condition (No Source)
 
 * Mixed boundary condition formulation.
 * Steady-state behavior investigated.
 
-### Case 6: Robin Boundary Condition (With Source)
-
-* Mixed boundary condition with source term.
-* Analytical and numerical comparison performed.
 
 ## Numerical Method
 
