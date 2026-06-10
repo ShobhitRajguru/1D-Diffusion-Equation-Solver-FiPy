@@ -72,7 +72,6 @@ Case_5/
 Case_6/
 docs/
 README.md
-environment.yml
 ```
 
 ## Key Results
